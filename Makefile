@@ -1,5 +1,5 @@
 GCC = g++
-CFLAGS = -Wall -O2
+CFLAGS = -Wall -O2 -Wno-unused-variable
 LDFLAGS = -mwindows -lcomctl32
 
 DIR_SRC = src
