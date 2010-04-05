@@ -12,6 +12,8 @@ namespace ui
 	extern std::list<HWND> g_dialogs;
 
 	void initialize(HINSTANCE instance);
+	void create_splash_dialog();
+
 	LRESULT CALLBACK main_window_procedure(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam);
 }
 

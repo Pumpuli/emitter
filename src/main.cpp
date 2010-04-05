@@ -12,7 +12,8 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE previous_instance, LPSTR cmd_li
 	{
 		ui::initialize(instance);
 
-		ui::splash_dialog_t* splash_dialog = new ui::splash_dialog_t;
+		// Splash dialog takes care of creating main window.
+		ui::create_splash_dialog();
 
 		MSG msg;
 		while (::GetMessage(&msg, NULL, 0, 0) > 0)

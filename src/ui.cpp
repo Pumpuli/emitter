@@ -3,6 +3,7 @@
 #include <stdexcept>
 #include <windows.h>
 #include <commctrl.h>
+#include "ui_splash.h"
 
 const wchar_t ui::g_window_class_name[] = L"emitter-window-class";
 HINSTANCE ui::g_instance = NULL;
@@ -28,6 +29,12 @@ void ui::initialize(HINSTANCE instance)
 
 	if (!::RegisterClass(&wc))
 		throw std::runtime_error("Registering window class failed.");
+}
+
+void ui::create_splash_dialog()
+{
+	// splash_dialog_t deletes itself.
+	splash_dialog_t* splash = new splash_dialog_t;
 }
 
 LRESULT CALLBACK ui::main_window_procedure(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
