@@ -3,6 +3,7 @@
 #include "ui_dialog.h"
 #include "ui.h"
 #include "resource.h"
+#include "language.h"
 
 ui::splash_dialog_t::splash_dialog_t():
 	dialog_t(IDD_SPLASH)
@@ -21,6 +22,10 @@ INT_PTR CALLBACK ui::splash_dialog_t::dialog_procedure(HWND hwnd, UINT msg, WPAR
 	case WM_COMMAND:
 		switch (LOWORD(wparam))
 		{
+		case IDC_SPLASH_NEW:
+			::DestroyWindow(hwnd);
+			return TRUE;
+
 		case IDCANCEL:
 			::DestroyWindow(hwnd);
 			return TRUE;
@@ -29,6 +34,10 @@ INT_PTR CALLBACK ui::splash_dialog_t::dialog_procedure(HWND hwnd, UINT msg, WPAR
 
 	case WM_INITDIALOG:
 		{
+			::SetDlgItemText(hwnd, IDC_SPLASH_BUSY, text::ui(text::SPLASH_BUSY, "Etsitään..."));
+			::SetDlgItemText(hwnd, IDC_SPLASH_NEW, text::ui(text::SPLASH_NEW, "Uusi"));
+			::SetDlgItemText(hwnd, IDCANCEL, text::ui(text::SPLASH_EXIT, "Lopeta"));
+
 			HICON icon = ::LoadIcon(g_instance, MAKEINTRESOURCE(IDI_MAIN));
 			::SendMessage(hwnd, WM_SETICON, ICON_SMALL, reinterpret_cast<LPARAM>(icon));
 			::SendMessage(hwnd, WM_SETICON, ICON_BIG, reinterpret_cast<LPARAM>(icon));
