@@ -5,6 +5,7 @@
 #include <commctrl.h>
 #include "ui_splash.h"
 #include "resource.h"
+#include "language.h"
 
 const wchar_t ui::g_window_class_name[] = L"emitter-window-class";
 HINSTANCE ui::g_instance = NULL;
@@ -66,6 +67,8 @@ LRESULT CALLBACK ui::main_window_procedure(HWND hwnd, UINT msg, WPARAM wparam, L
 	{
 	case WM_CREATE:
 		{
+			::SetWindowText(hwnd, text::ui(text::EMITTER));
+
 			HICON icon = ::LoadIcon(g_instance, MAKEINTRESOURCE(IDI_MAIN));
 			::SendMessage(hwnd, WM_SETICON, ICON_SMALL, reinterpret_cast<LPARAM>(icon));
 			::SendMessage(hwnd, WM_SETICON, ICON_BIG, reinterpret_cast<LPARAM>(icon));
