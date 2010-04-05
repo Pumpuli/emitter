@@ -1,5 +1,6 @@
 #include "global.h"
 #include "ui.h"
+#include <stdexcept>
 #include <windows.h>
 #include <commctrl.h>
 
@@ -7,7 +8,7 @@ const wchar_t ui::g_window_class_name[] = L"emitter-window-class";
 HINSTANCE ui::g_instance = NULL;
 std::list<HWND> ui::g_dialogs;
 
-bool ui::initialize(HINSTANCE instance)
+void ui::initialize(HINSTANCE instance)
 {
 	g_instance = instance;
 

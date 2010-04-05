@@ -44,8 +44,6 @@ void ui::dialog_t::create(WORD resource_id, HWND parent)
 		throw std::runtime_error("Creating window failed.");
 
 	g_dialogs.push_back(m_hwnd);
-
-	return true;
 }
 
 bool ui::process_dialog_message(MSG& msg)
