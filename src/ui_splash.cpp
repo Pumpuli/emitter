@@ -5,7 +5,8 @@
 #include "resource.h"
 #include "language.h"
 
-ui::splash_dialog_t::splash_dialog_t()
+ui::splash_dialog_t::splash_dialog_t():
+	m_quitting(true)
 {
 	create(IDD_SPLASH);
 }
@@ -22,6 +23,7 @@ INT_PTR CALLBACK ui::splash_dialog_t::dialog_procedure(HWND hwnd, UINT msg, WPAR
 		switch (LOWORD(wparam))
 		{
 		case IDC_SPLASH_NEW:
+			m_quitting = false;
 			::DestroyWindow(hwnd);
 			return TRUE;
 
@@ -49,15 +51,15 @@ INT_PTR CALLBACK ui::splash_dialog_t::dialog_procedure(HWND hwnd, UINT msg, WPAR
 		return TRUE;
 
 	case WM_DESTROY:
-		::PostQuitMessage(0);
+		if (!m_quitting)
+			create_main_window();
+		else
+			::PostQuitMessage(0);
+
+		delete this;
+
 		return TRUE;
 	}
 
 	return FALSE;
-}
-
-void ui::splash_dialog_t::destroy()
-{
-	::PostQuitMessage(0);
-	delete this;
 }

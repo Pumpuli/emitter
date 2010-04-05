@@ -15,9 +15,9 @@ namespace ui
 
 		INT_PTR CALLBACK dialog_procedure(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam);
 
-		void destroy();
 	private:
 		HWND m_hwnd;
+		bool m_quitting;
 	};
 }
 
