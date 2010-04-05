@@ -5,8 +5,7 @@
 #include "resource.h"
 #include "language.h"
 
-ui::splash_dialog_t::splash_dialog_t():
-	dialog_t(IDD_SPLASH)
+ui::splash_dialog_t::splash_dialog_t()
 {
 	create(IDD_SPLASH);
 }

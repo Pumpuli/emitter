@@ -9,7 +9,7 @@ namespace ui
 	class dialog_t
 	{
 	public:
-		dialog_t(WORD resource_id, HWND parent = NULL);
+		dialog_t();
 		virtual ~dialog_t();
 
 		virtual INT_PTR CALLBACK dialog_procedure(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) = 0;

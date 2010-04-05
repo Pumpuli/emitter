@@ -26,7 +26,7 @@ static INT_PTR CALLBACK generic_dialog_procedure(HWND hwnd, UINT msg, WPARAM wpa
 	return instance->dialog_procedure(hwnd, msg, wparam, lparam);
 }
 
-ui::dialog_t::dialog_t(WORD resource_id, HWND parent):
+ui::dialog_t::dialog_t():
 	m_hwnd(NULL)
 {
 }
