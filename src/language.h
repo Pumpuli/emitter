@@ -8,6 +8,7 @@ namespace text
 {
 	enum text_id_t
 	{
+		EMITTER,
 		SPLASH_BUSY,
 		SPLASH_NEW,
 		SPLASH_EXIT

@@ -33,6 +33,7 @@ INT_PTR CALLBACK ui::splash_dialog_t::dialog_procedure(HWND hwnd, UINT msg, WPAR
 
 	case WM_INITDIALOG:
 		{
+			::SetWindowText(hwnd, text::ui(text::EMITTER, "Emitter"));
 			::SetDlgItemText(hwnd, IDC_SPLASH_BUSY, text::ui(text::SPLASH_BUSY, "Looking for server in local area network..."));
 			::SetDlgItemText(hwnd, IDC_SPLASH_NEW, text::ui(text::SPLASH_NEW, "Create server"));
 			::SetDlgItemText(hwnd, IDCANCEL, text::ui(text::SPLASH_EXIT, "Exit"));
