@@ -9,12 +9,12 @@ namespace text
 	enum text_id_t
 	{
 		EMITTER,
+		EXIT,
 		SPLASH_BUSY,
-		SPLASH_NEW,
-		SPLASH_EXIT
+		SPLASH_NEW
 	};
 
-	const wchar_t* ui(text_id_t id, const std::string& fallback);
+	const wchar_t* ui(text_id_t id);
 }
 
 #endif
