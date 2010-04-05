@@ -33,9 +33,9 @@ INT_PTR CALLBACK ui::splash_dialog_t::dialog_procedure(HWND hwnd, UINT msg, WPAR
 
 	case WM_INITDIALOG:
 		{
-			::SetDlgItemText(hwnd, IDC_SPLASH_BUSY, text::ui(text::SPLASH_BUSY, "Etsitään..."));
-			::SetDlgItemText(hwnd, IDC_SPLASH_NEW, text::ui(text::SPLASH_NEW, "Uusi"));
-			::SetDlgItemText(hwnd, IDCANCEL, text::ui(text::SPLASH_EXIT, "Lopeta"));
+			::SetDlgItemText(hwnd, IDC_SPLASH_BUSY, text::ui(text::SPLASH_BUSY, "Looking for server in local area network..."));
+			::SetDlgItemText(hwnd, IDC_SPLASH_NEW, text::ui(text::SPLASH_NEW, "Create server"));
+			::SetDlgItemText(hwnd, IDCANCEL, text::ui(text::SPLASH_EXIT, "Exit"));
 
 			HICON icon = ::LoadIcon(g_instance, MAKEINTRESOURCE(IDI_MAIN));
 			::SendMessage(hwnd, WM_SETICON, ICON_SMALL, reinterpret_cast<LPARAM>(icon));
