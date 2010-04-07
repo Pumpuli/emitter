@@ -1,5 +1,6 @@
+CC = gcc
 GCC = g++
-CFLAGS = -Wall -O2 -Wno-unused-variable
+CFLAGS = -Wall -O2
 LDFLAGS = -mwindows -lcomctl32
 
 DIR_SRC = src
@@ -20,13 +21,16 @@ all: $(APPLICATION)
 clean:
 	rm $(DIR_OBJ)/*
 
+sqlite: $(DIR_SRC)/sqlite/sqlite3.c
+	$(CC) $(CFLAGS) -Wno-uninitialized -c -o$(DIR_OBJ)/sqlite3.o $(DIR_SRC)/sqlite/sqlite3.c
+
 $(APPLICATION): $(DIR_BIN)/$(BINARY)
 
-$(DIR_BIN)/$(BINARY): $(FILES_OBJ)
-	$(GCC) $(CFLAGS) -o$@ $(FILES_OBJ) $(LDFLAGS)
+$(DIR_BIN)/$(BINARY): $(FILES_OBJ) sqlite
+	$(GCC) $(CFLAGS) -o$@ $(FILES_OBJ) $(DIR_OBJ)/sqlite3.o $(LDFLAGS)
 
 $(DIR_OBJ)/%.o: $(DIR_SRC)/%.cpp $(DIR_SRC)/%.h
-	$(GCC) $(CFLAGS) -c -I"$(DIR_RES)" -o$@ $<
+	$(GCC) $(CFLAGS) -Wno-unused-variable -c -I"$(DIR_RES)" -o$@ $<
 
 $(DIR_OBJ)/%.res: $(DIR_RES)/%.rc
 	windres --input-format=rc --output-format=coff --input=$< --output=$@
