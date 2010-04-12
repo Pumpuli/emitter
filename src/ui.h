@@ -11,6 +11,8 @@ namespace ui
 	extern HINSTANCE g_instance;
 	extern std::list<HWND> g_dialogs;
 	extern HWND g_main_window;
+	extern HFONT g_main_font;
+	extern HWND g_main_tabs;
 
 	void initialize(HINSTANCE instance);
 	void create_splash_dialog();

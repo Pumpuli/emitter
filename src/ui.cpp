@@ -11,6 +11,8 @@ const wchar_t ui::g_window_class_name[] = L"emitter-window-class";
 HINSTANCE ui::g_instance = NULL;
 std::list<HWND> ui::g_dialogs;
 HWND ui::g_main_window = NULL;
+HFONT ui::g_main_font = NULL;
+HWND ui::g_main_tabs = NULL;
 
 void ui::initialize(HINSTANCE instance)
 {
@@ -67,6 +69,28 @@ LRESULT CALLBACK ui::main_window_procedure(HWND hwnd, UINT msg, WPARAM wparam, L
 	{
 	case WM_CREATE:
 		{
+			g_main_font = ::CreateFont(
+				16, // height
+				0, // width
+				0, // angle of escapement
+				0, // orientation
+				FW_NORMAL, // weight
+				FALSE, // italic
+				FALSE, // underline
+				FALSE, // strike
+				DEFAULT_CHARSET,
+				OUT_DEFAULT_PRECIS, // output precision
+				CLIP_DEFAULT_PRECIS, // clip precision
+				DEFAULT_QUALITY,
+				DEFAULT_PITCH | FF_DONTCARE,
+				L"Tahoma"
+			);
+
+			if (g_main_font)
+				::SendMessage(hwnd, WM_SETFONT, reinterpret_cast<WPARAM>(g_main_font), MAKELPARAM(FALSE, 0));
+		}
+
+		{
 			RECT pos;
 			::GetWindowRect(hwnd, &pos);
 			::SetWindowPos(hwnd, NULL, (::GetSystemMetrics(SM_CXSCREEN) / 2) - ((pos.right - pos.left) / 2), (::GetSystemMetrics(SM_CYSCREEN) / 2) - ((pos.bottom - pos.top) / 2), 0, 0, SWP_NOACTIVATE | SWP_NOREPOSITION | SWP_NOSENDCHANGING | SWP_NOSIZE | SWP_NOZORDER);
@@ -77,9 +101,41 @@ LRESULT CALLBACK ui::main_window_procedure(HWND hwnd, UINT msg, WPARAM wparam, L
 			::SendMessage(hwnd, WM_SETICON, ICON_SMALL, reinterpret_cast<LPARAM>(icon));
 			::SendMessage(hwnd, WM_SETICON, ICON_BIG, reinterpret_cast<LPARAM>(icon));
 		}
+
+		{
+			RECT pos;
+			::GetClientRect(hwnd, &pos);
+
+			g_main_tabs = ::CreateWindowEx(
+				WS_EX_CLIENTEDGE,
+				WC_TABCONTROL,
+				NULL,
+				TCS_HOTTRACK | WS_CHILD | WS_CLIPCHILDREN | WS_CLIPSIBLINGS | WS_VISIBLE,
+				0, 0,
+				pos.right, pos.bottom,
+				hwnd,
+				NULL,
+				g_instance,
+				NULL
+			);
+
+			if (g_main_tabs)
+			{
+				if (g_main_font)
+					::SendMessage(g_main_tabs, WM_SETFONT, reinterpret_cast<WPARAM>(g_main_font), MAKELPARAM(FALSE, 0));
+
+				TC_ITEM tab = {0};
+				tab.mask = TCIF_TEXT;
+				tab.pszText = const_cast<wchar_t*>(text::ui(text::EMITTER));
+				::SendMessage(g_main_tabs, TCM_INSERTITEM, 1, reinterpret_cast<LPARAM>(&tab));
+				::SendMessage(g_main_tabs, TCM_INSERTITEM, 2, reinterpret_cast<LPARAM>(&tab));
+			}
+		}
 		return 0;
 
 	case WM_DESTROY:
+		if (g_main_font)
+			::DeleteObject(g_main_font);
 		::PostQuitMessage(0);
 		return 0;
 	}
