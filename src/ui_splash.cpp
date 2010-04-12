@@ -35,6 +35,11 @@ INT_PTR CALLBACK ui::splash_dialog_t::dialog_procedure(HWND hwnd, UINT msg, WPAR
 
 	case WM_INITDIALOG:
 		{
+			RECT pos;
+			::GetWindowRect(hwnd, &pos);
+
+			::SetWindowPos(hwnd, NULL, (::GetSystemMetrics(SM_CXSCREEN) / 2) - ((pos.right - pos.left) / 2), (::GetSystemMetrics(SM_CYSCREEN) / 2) - ((pos.bottom - pos.top) / 2), 0, 0, SWP_NOACTIVATE | SWP_NOREPOSITION | SWP_NOSENDCHANGING | SWP_NOSIZE | SWP_NOZORDER);
+
 			::SetWindowText(hwnd, text::ui(text::EMITTER));
 			::SetDlgItemText(hwnd, IDC_SPLASH_BUSY, text::ui(text::SPLASH_BUSY));
 			::SetDlgItemText(hwnd, IDC_SPLASH_NEW, text::ui(text::SPLASH_NEW));
