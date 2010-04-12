@@ -67,6 +67,10 @@ LRESULT CALLBACK ui::main_window_procedure(HWND hwnd, UINT msg, WPARAM wparam, L
 	{
 	case WM_CREATE:
 		{
+			RECT pos;
+			::GetWindowRect(hwnd, &pos);
+			::SetWindowPos(hwnd, NULL, (::GetSystemMetrics(SM_CXSCREEN) / 2) - ((pos.right - pos.left) / 2), (::GetSystemMetrics(SM_CYSCREEN) / 2) - ((pos.bottom - pos.top) / 2), 0, 0, SWP_NOACTIVATE | SWP_NOREPOSITION | SWP_NOSENDCHANGING | SWP_NOSIZE | SWP_NOZORDER);
+
 			::SetWindowText(hwnd, text::ui(text::EMITTER));
 
 			HICON icon = ::LoadIcon(g_instance, MAKEINTRESOURCE(IDI_MAIN));
