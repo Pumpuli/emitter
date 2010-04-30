@@ -6,6 +6,7 @@
 #define IDD_SPLASH 101
 
 #define IDC_SPLASH_BUSY 101
-#define IDC_SPLASH_NEW 102
+#define IDC_SPLASH_RECENT 102
+#define IDC_SPLASH_NEW 103
 
 #endif

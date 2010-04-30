@@ -13,7 +13,7 @@
 	#define WIN32_LEAN_AND_MEAN
 #endif
 
-#ifdefn _WIN32_IE
+#ifdef _WIN32_IE
 	#undef _WIN32_IE
 #endif
 #define _WIN32_IE 0x0400

@@ -11,6 +11,7 @@ namespace text
 		EMITTER,
 		EXIT,
 		SPLASH_BUSY,
+		SPLASH_RECENT,
 		SPLASH_NEW
 	};
 
