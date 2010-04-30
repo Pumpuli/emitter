@@ -6,7 +6,8 @@
 #include "language.h"
 
 ui::splash_dialog_t::splash_dialog_t():
-	m_quitting(true)
+	m_quitting(true),
+	m_recent_visible(false)
 {
 	create(IDD_SPLASH);
 }
@@ -22,6 +23,16 @@ INT_PTR CALLBACK ui::splash_dialog_t::dialog_procedure(HWND hwnd, UINT msg, WPAR
 	case WM_COMMAND:
 		switch (LOWORD(wparam))
 		{
+		case IDC_SPLASH_RECENT:
+			m_recent_visible = !m_recent_visible;
+
+			if (m_recent_visible)
+				::SetWindowPos(hwnd, NULL, 0, 0, m_width, m_height_expanded, SWP_NOACTIVATE | SWP_NOMOVE | SWP_NOREPOSITION | SWP_NOZORDER);
+			else
+				::SetWindowPos(hwnd, NULL, 0, 0, m_width, m_height, SWP_NOACTIVATE | SWP_NOMOVE | SWP_NOREPOSITION | SWP_NOZORDER);
+
+			return TRUE;
+
 		case IDC_SPLASH_NEW:
 			m_quitting = false;
 			::DestroyWindow(hwnd);
@@ -38,7 +49,14 @@ INT_PTR CALLBACK ui::splash_dialog_t::dialog_procedure(HWND hwnd, UINT msg, WPAR
 			RECT pos;
 			::GetWindowRect(hwnd, &pos);
 
-			::SetWindowPos(hwnd, NULL, (::GetSystemMetrics(SM_CXSCREEN) / 2) - ((pos.right - pos.left) / 2), (::GetSystemMetrics(SM_CYSCREEN) / 2) - ((pos.bottom - pos.top) / 2), 0, 0, SWP_NOACTIVATE | SWP_NOREPOSITION | SWP_NOSENDCHANGING | SWP_NOSIZE | SWP_NOZORDER);
+			RECT container_pos;
+			::GetWindowRect(::GetDlgItem(hwnd, IDC_SPLASH_RECENT_CONTAINER), &container_pos);
+
+			m_width = (pos.right - pos.left) + 1;
+			m_height_expanded = (pos.bottom - pos.top) + 1;
+			m_height = m_height_expanded - (pos.bottom - container_pos.top);
+
+			::SetWindowPos(hwnd, NULL, (::GetSystemMetrics(SM_CXSCREEN) / 2) - (m_width / 2), (::GetSystemMetrics(SM_CYSCREEN) / 2) - (m_height / 2), m_width, m_height, SWP_NOACTIVATE | SWP_NOREPOSITION | SWP_NOSENDCHANGING | SWP_NOZORDER);
 
 			::SetWindowText(hwnd, text::ui(text::EMITTER));
 			::SetDlgItemText(hwnd, IDC_SPLASH_BUSY, text::ui(text::SPLASH_BUSY));

@@ -19,7 +19,7 @@ static const wchar_t* get_default_text(text::text_id_t id)
 		return L"Looking for server in local area network...";
 
 	case text::SPLASH_RECENT:
-		return L"Recent...";
+		return L"Recent";
 
 	case text::SPLASH_NEW:
 		return L"Create server";

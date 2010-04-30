@@ -17,7 +17,11 @@ namespace ui
 
 	private:
 		HWND m_hwnd;
+		int m_width;
+		int m_height;
+		int m_height_expanded;
 		bool m_quitting;
+		bool m_recent_visible;
 	};
 }
 
