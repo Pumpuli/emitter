@@ -2,7 +2,7 @@ CC = gcc
 GCC = g++
 RC = windres
 CFLAGS = -Wall -O2
-LDFLAGS = -mwindows -lcomctl32
+LDFLAGS = -mwindows -lgdi32 -lcomctl32
 
 DIR_SRC = src
 DIR_RES = res
