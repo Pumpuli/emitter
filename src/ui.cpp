@@ -129,6 +129,8 @@ LRESULT CALLBACK ui::main_window_procedure(HWND hwnd, UINT msg, WPARAM wparam, L
 				tab.pszText = const_cast<wchar_t*>(text::ui(text::EMITTER));
 				::SendMessage(g_main_tabs, TCM_INSERTITEM, 1, reinterpret_cast<LPARAM>(&tab));
 				::SendMessage(g_main_tabs, TCM_INSERTITEM, 2, reinterpret_cast<LPARAM>(&tab));
+				::SendMessage(g_main_tabs, TCM_INSERTITEM, 2, reinterpret_cast<LPARAM>(&tab));
+				::SendMessage(g_main_tabs, TCM_INSERTITEM, 2, reinterpret_cast<LPARAM>(&tab));
 			}
 		}
 		return 0;
