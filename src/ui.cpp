@@ -133,7 +133,7 @@ LRESULT CALLBACK ui::main_window_procedure(HWND hwnd, UINT msg, WPARAM wparam, L
 		}
 		return 0;
 
-	case WM_DESTROY:
+	case WM_NCDESTROY:
 		if (g_main_font)
 			::DeleteObject(g_main_font);
 		::PostQuitMessage(0);

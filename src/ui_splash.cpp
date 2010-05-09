@@ -74,7 +74,7 @@ INT_PTR CALLBACK ui::splash_dialog_t::dialog_procedure(HWND hwnd, UINT msg, WPAR
 		::DestroyWindow(hwnd);
 		return TRUE;
 
-	case WM_DESTROY:
+	case WM_NCDESTROY:
 		if (!m_quitting)
 			create_main_window();
 		else
