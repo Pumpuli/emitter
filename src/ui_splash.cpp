@@ -63,6 +63,7 @@ INT_PTR CALLBACK ui::splash_dialog_t::dialog_procedure(HWND hwnd, UINT msg, WPAR
 			::SetDlgItemText(hwnd, IDC_SPLASH_NEW, text::ui(text::SPLASH_NEW));
 			::SetDlgItemText(hwnd, IDC_SPLASH_RECENT, text::ui(text::SPLASH_RECENT));
 			::SetDlgItemText(hwnd, IDCANCEL, text::ui(text::EXIT));
+			::SetDlgItemText(hwnd, IDC_SPLASH_RECENT_CONTAINER, text::ui(text::SPLASH_RECENT));
 
 			HICON icon = ::LoadIcon(g_instance, MAKEINTRESOURCE(IDI_MAIN));
 			::SendMessage(hwnd, WM_SETICON, ICON_SMALL, reinterpret_cast<LPARAM>(icon));

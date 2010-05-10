@@ -22,7 +22,7 @@ static const wchar_t* get_default_text(text::text_id_t id)
 		return L"Recent";
 
 	case text::SPLASH_NEW:
-		return L"Create server";
+		return L"Create event";
 	}
 
 	return L"[unknown]";
