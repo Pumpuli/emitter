@@ -70,7 +70,7 @@ LRESULT CALLBACK ui::main_window_procedure(HWND hwnd, UINT msg, WPARAM wparam, L
 	case WM_CREATE:
 		{
 			g_main_font = ::CreateFont(
-				16, // height
+				14, // height
 				0, // width
 				0, // angle of escapement
 				0, // orientation
@@ -83,7 +83,7 @@ LRESULT CALLBACK ui::main_window_procedure(HWND hwnd, UINT msg, WPARAM wparam, L
 				CLIP_DEFAULT_PRECIS, // clip precision
 				DEFAULT_QUALITY,
 				DEFAULT_PITCH | FF_DONTCARE,
-				L"Tahoma"
+				L"MS Shell Dlg"
 			);
 
 			if (g_main_font)
